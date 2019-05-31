@@ -3,7 +3,7 @@ import Char from "./Char";
 
 class CharList extends React.Component {
   render() {
-    console.log(this.props.chars);
+    // console.log(this.props.chars);
     return (
       <div className="card-list">
         {this.props.chars.map(char => (

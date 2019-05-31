@@ -8,7 +8,10 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      starwarsChars: []
+      starwarsChars: [],
+      previousPage: "",
+      nextPage: "",
+      currentPage: `https://swapi.co/api/people/?page=1`
     };
   }
 
@@ -25,17 +28,45 @@ class App extends Component {
         return res.json();
       })
       .then(data => {
-        this.setState({ starwarsChars: data.results });
+        this.setState({
+          starwarsChars: data.results,
+          previousPage: data.previous,
+          nextPage: data.next
+        });
       })
       .catch(err => {
         throw new Error(err);
       });
   };
 
+  nextPage = () => {
+    if (this.state.nextPage === null) {
+      this.getCharacters(this.state.currentPage);
+    } else {
+      this.getCharacters(this.state.nextPage);
+    }
+  };
+
+  previousPage = () => {
+    if (this.state.previousPage === null) {
+      this.getCharacters(this.state.currentPage);
+    } else {
+      this.getCharacters(this.state.previousPage);
+    }
+  };
+
   render() {
     return (
       <div className="App">
         <h1 className="Header">React Wars</h1>
+        <div className="button-container">
+          <button className="btn" onClick={this.previousPage}>
+            Previous Page
+          </button>
+          <button className="btn" onClick={this.nextPage}>
+            Next Page
+          </button>
+        </div>
         <CharList chars={this.state.starwarsChars} />
       </div>
     );

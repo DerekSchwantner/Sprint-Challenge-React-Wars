@@ -21,7 +21,7 @@ body {
   margin-bottom: 6rem;
 }
 
-.App .hr {
+.App .line {
   margin: 20px 0 30px 0;
   widows: 30%;
   border: 1px solid rgba(255, 215, 0, 0.5);
